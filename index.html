@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Consent Mode v2 & GA4 (DSGVO / GDPR Compliant) -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    // Initialize default consent from storage or default to denied
+    var storedConsent = null;
+    try { storedConsent = localStorage.getItem('okf_cookie_consent'); } catch (e) {}
+
+    gtag('consent', 'default', {
+      'analytics_storage': storedConsent === 'granted' ? 'granted' : 'denied',
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'wait_for_update': 500
+    });
+
+    gtag('js', new Date());
+    gtag('config', 'G-CCKX1QN84C', {
+      'anonymize_ip': true
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CCKX1QN84C"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OKF Agent Memory — Git-Native Persistent Memory for AI Coding Agents</title>
+  <meta name="description"
+    content="Sub-300µs, zero-dependency in-memory BM25 search, embedded MCP server, and progressive disclosure for Claude Code, Cursor, Codex, and local LLMs. Standardized on Google OKF v0.2.">
+  <link rel="canonical" href="https://okf-memory.dev/">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://okf-memory.dev/">
+  <meta property="og:title" content="OKF Agent Memory — Git-Native Persistent Memory for AI Coding Agents">
+  <meta property="og:description"
+    content="Sub-300µs, zero-dependency in-memory BM25 search, embedded MCP server, and progressive disclosure for Claude Code, Cursor, and Local LLMs. Standardized on Google OKF v0.2.">
+  <meta property="og:image" content="https://okf-memory.dev/assets/og-preview.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://okf-memory.dev/">
+  <meta name="twitter:title" content="OKF Agent Memory — Git-Native Persistent Memory for AI Coding Agents">
+  <meta name="twitter:description"
+    content="Sub-300µs, zero-dependency in-memory BM25 search, embedded MCP server, and progressive disclosure for Claude Code, Cursor, and Local LLMs. Standardized on Google OKF v0.2.">
+  <meta name="twitter:image" content="https://okf-memory.dev/assets/og-preview.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#" class="brand-logo">
+        <div class="logo-icon">🧠</div>
+        <span>OKF Agent Memory</span>
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#benchmarks">Benchmarks</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#quickstart">Quickstart</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://github.com/okf-memory/okf-agent-memory" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a href="#waitlist" class="btn btn-primary">Join Cloud Beta</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="badge-wrapper">
+          <span class="badge-pulse"></span>
+          <span>Release v0.1.0 • Google OKF v0.2 Compliant • Sub-300µs Search</span>
+        </div>
+        <h1 class="hero-title">
+          The Git-Native Memory for <br><span class="hero-highlight">Autonomous AI Coding Agents</span>
+        </h1>
+        <p class="hero-subtitle">
+          Transparent, auditable Markdown memory for Claude Code, Cursor, and Local LLMs. Slash token overhead by 80%
+          through in-memory BM25 progressive disclosure — with zero external database dependencies.
+        </p>
+
+        <div class="hero-cta-group">
+          <div class="install-switcher">
+            <div class="install-tabs">
+              <button class="install-tab-btn active" data-install="curl">cURL 1-Liner</button>
+              <button class="install-tab-btn" data-install="go">Go Install</button>
+              <button class="install-tab-btn" data-install="source">Source Build</button>
+              <button class="install-tab-btn" data-install="brew">Homebrew</button>
+            </div>
+            <div id="hero-install-pill" class="install-pill" data-copy="curl -fsSL https://okf-memory.dev/install.sh | sh">
+              <span id="hero-install-cmd">$ curl -fsSL https://okf-memory.dev/install.sh | sh</span>
+              <span class="copy-icon">📋</span>
+            </div>
+          </div>
+          <a href="#quickstart" class="btn btn-secondary">Get Started in 1 Min</a>
+          <a href="#waitlist" class="btn btn-glow">Get OKF Cloud Access</a>
+        </div>
+
+        <!-- Interactive Terminal Simulator -->
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <button class="term-tab btn-secondary btn active" style="padding: 4px 10px; font-size: 0.75rem;"
+                data-cmd="search">okf search</button>
+              <button class="term-tab btn-secondary btn" style="padding: 4px 10px; font-size: 0.75rem;"
+                data-cmd="bootstrap">okf bootstrap</button>
+              <button class="term-tab btn-secondary btn" style="padding: 4px 10px; font-size: 0.75rem;"
+                data-cmd="validate">okf validate</button>
+              <button class="term-tab btn-secondary btn" style="padding: 4px 10px; font-size: 0.75rem;"
+                data-cmd="concept">📄 auth-decision.md</button>
+            </div>
+            <div class="terminal-title">zsh — okf-agent-memory</div>
+          </div>
+          <div class="terminal-body">
+            <pre id="terminal-code-output"><span class="term-cmd">$ okf search "jwt auth flow" knowledge</span>
+
+Found 1 matching concept(s) in 'knowledge':
+
+ 1. <span class="term-purple">[4.82]</span> <span class="term-green">architecture/auth-decision</span> (<span class="term-yellow">Decision</span>)
+    <span class="term-dim">Standardized RSA-256 JWTs with 15m expiration & sliding refresh tokens.</span>
+    Matches: <span class="term-green">title, description, tags</span>
+
+<span class="term-stat">⚡ In-Memory BM25 search completed in 268.4µs (&lt;0.3ms)</span></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Core Value</span>
+          <h2 class="section-title">Engineered for Maximum Agent Performance</h2>
+          <p class="section-desc">Why developers and enterprises choose OKF over opaque vector databases and
+            unstructured flat files.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3 class="feature-title">Sub-300µs BM25 Search</h3>
+            <p class="feature-text">Built in pure Go with zero runtime dependencies. Queries full knowledge graphs in
+              microseconds directly in memory without slow vector embeddings or external API calls.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🗂️</div>
+            <h3 class="feature-title">Progressive Disclosure</h3>
+            <p class="feature-text">Slash token costs by up to 80%. Instead of dumping 20k-token monoliths into every
+              prompt, agents dynamically pull only the exact 300-token concept required.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <h3 class="feature-title">Trust & Provenance Tiers</h3>
+            <p class="feature-text">Strict distinction between authoritative human decisions
+              (<code>verified: human</code>) and agent drafts (<code>generated: agent</code>). Agents never overwrite
+              human architectural law.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔌</div>
+            <h3 class="feature-title">Built-In Stdio MCP Server</h3>
+            <p class="feature-text">Plug-and-play Model Context Protocol (MCP) server embedded inside the single binary.
+              Works seamlessly with Claude Code, Cursor, Windsurf, and custom IDEs.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3 class="feature-title">100% Git-Native & Auditable</h3>
+            <p class="feature-text">No proprietary database silos. Your memory lives in human-readable Markdown files
+              right in your repository. Use <code>git diff</code>, <code>git blame</code>, and code reviews.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3 class="feature-title">1-Command Bootstrapping</h3>
+            <p class="feature-text">Run <code>okf bootstrap .</code> in any new or existing repository. Automatically
+              scaffolds knowledge bundles, non-destructively enriches <code>AGENTS.md</code>, and installs skills.</p>
+          </div>
+        </div>
+
+        <!-- Local LLM & Privacy Callout -->
+        <div class="local-ai-banner">
+          <div class="local-ai-icon">⚡</div>
+          <div class="local-ai-content">
+            <h4>
+              Up to 5.2x Faster TTFT for Local LLMs (Ollama / LM Studio / Qwen / Mistral)
+              <span class="local-ai-tag">100% OFFLINE</span>
+            </h4>
+            <p>
+              Eliminates the local AI bottleneck: Feeding 20k-token monolith files into local 8B–26B models causes
+              severe prompt prefill latency (18s+ on Metal GPU) and exhausts VRAM KV-caches. With OKF Progressive Disclosure, agents
+              query in &lt;300µs and ingest only the exact 300-token concept required — speeding up TTFT by up to 5.2x
+              without hallucinations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benchmark Comparison & Empirical LLM Results -->
+    <section id="benchmarks" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Live Empirical Benchmarks</span>
+          <h2 class="section-title">Tested Across Local &amp; Remote Models</h2>
+          <p class="section-desc">
+            Direct empirical measurements proving OKF's dual impact: slashing <strong>80.1% prompt token billing</strong> on <strong>Remote Cloud APIs</strong> and eliminating <strong>brutal prefill latency (up to 5.2x faster TTFT)</strong> on <strong>Local On-Device Models</strong>.
+          </p>
+        </div>
+
+        <!-- Hardware / Cloud Environment Banner -->
+        <div class="benchmark-hardware-card">
+          <div class="hw-icon-pulse" id="hw-icon">☁️</div>
+          <div class="hw-content">
+            <div class="hw-badge-row">
+              <span class="hw-pill-live hw-pill-cloud" id="hw-pill"><span class="hw-dot cloud-dot" id="hw-dot"></span><span id="hw-pill-text">REMOTE MODEL • Official OpenAI Cloud API</span></span>
+              <span class="hw-date">Test Date: September 2026</span>
+            </div>
+            <h3 class="hw-machine-title" id="hw-machine-title">OpenAI Production Cloud • api.openai.com</h3>
+            <p class="hw-machine-details" id="hw-machine-details">
+              <strong>Deployment:</strong> Remote Cloud SaaS • <strong>Model:</strong> <code>gpt-5.6-sol</code> • 
+              <strong>Primary Benefit:</strong> -80.1% Token Billing &amp; Context Savings (3,034 → 603 tokens)
+            </p>
+          </div>
+          <div class="hw-actions">
+            <a id="hw-report-link" href="https://github.com/okf-memory/okf-agent-memory/blob/main/benchmarks/results/BENCHMARK_RESULTS_openai_gpt-5.6-sol.md" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+              View Raw Report ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Categorized Model Switcher: Remote vs Local -->
+        <div class="model-switcher-wrap">
+          <div class="model-switcher-groups">
+            <!-- Group 1: Remote Cloud API -->
+            <div class="model-category-block block-cloud">
+              <div class="model-category-header">
+                <span class="cat-pill cat-pill-cloud">☁️ Remote / Cloud API</span>
+                <span class="cat-sub">Pay-per-Token SaaS • Billing Focus</span>
+              </div>
+              <div class="model-category-tabs">
+                <button class="model-tab-btn model-tab-remote active" data-model="openai">
+                  <span class="tab-chip">Cloud Flagship</span>
+                  <span class="tab-name">OpenAI GPT-5.6 Sol</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Group 2: Local On-Device -->
+            <div class="model-category-block block-local">
+              <div class="model-category-header">
+                <span class="cat-pill cat-pill-local">🖥️ Local / On-Device</span>
+                <span class="cat-sub">Metal GPU • TTFT Acceleration Focus</span>
+              </div>
+              <div class="model-category-tabs">
+                <button class="model-tab-btn model-tab-local" data-model="ministral">
+                  <span class="tab-chip">14B Reasoning</span>
+                  <span class="tab-name">Mistral Ministral 14B</span>
+                </button>
+                <button class="model-tab-btn model-tab-local" data-model="gemma26b">
+                  <span class="tab-chip">26B MoE</span>
+                  <span class="tab-name">Google Gemma 4 26B</span>
+                </button>
+                <button class="model-tab-btn model-tab-local" data-model="gemma12b">
+                  <span class="tab-chip">12B Dense</span>
+                  <span class="tab-name">Google Gemma 4 12B</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Highlight Metric Cards -->
+        <div class="benchmark-metrics-grid">
+          <div class="b-card b-card-glow">
+            <div class="b-card-header">
+              <span class="b-card-label">Context Overhead Reduction</span>
+              <span class="b-delta-badge" id="metric-delta-tokens">-80.1%</span>
+            </div>
+            <div class="b-card-value" id="metric-tokens-val">603 <span class="unit">tokens</span></div>
+            <div class="b-card-sub" id="metric-tokens-sub">vs. 3,034 tokens in Monolith Dump</div>
+            <div class="b-progress-bar">
+              <div class="b-progress-fill tokens-fill" style="width: 19.9%;"></div>
+            </div>
+          </div>
+
+          <div class="b-card b-card-glow">
+            <div class="b-card-header">
+              <span class="b-card-label">Prefill Latency (TTFT)</span>
+              <span class="b-delta-badge badge-green" id="metric-delta-ttft">1.1x Faster</span>
+            </div>
+            <div class="b-card-value" id="metric-ttft-val">8,682 <span class="unit">ms</span></div>
+            <div class="b-card-sub" id="metric-ttft-sub">vs. 9,227 ms cloud TTFT latency</div>
+            <div class="b-progress-bar">
+              <div class="b-progress-fill ttft-fill" style="width: 94.1%;"></div>
+            </div>
+          </div>
+
+          <div class="b-card">
+            <div class="b-card-header">
+              <span class="b-card-label">Total Turn Duration</span>
+              <span class="b-delta-badge badge-cyan" id="metric-delta-time">-1.0s</span>
+            </div>
+            <div class="b-card-value" id="metric-time-val">14.9 <span class="unit">sec</span></div>
+            <div class="b-card-sub" id="metric-time-sub">vs. 15.9 sec full monolith turn</div>
+            <div class="b-progress-bar">
+              <div class="b-progress-fill time-fill" style="width: 93.7%;"></div>
+            </div>
+          </div>
+
+          <div class="b-card">
+            <div class="b-card-header">
+              <span class="b-card-label">Policy Adherence Accuracy</span>
+              <span class="b-delta-badge badge-green" id="metric-delta-compliance">100% PASS</span>
+            </div>
+            <div class="b-card-value" id="metric-compliance-val">4/4 <span class="unit">checks</span></div>
+            <div class="b-card-sub" id="metric-compliance-sub">AES-256-GCM • 96-bit Nonce • Headers</div>
+            <div class="b-compliance-pills">
+              <span class="c-pill">✓ GCM</span>
+              <span class="c-pill">✓ 12B Nonce</span>
+              <span class="c-pill">✓ Version Header</span>
+              <span class="c-pill">✓ No ECB/CBC</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Head-to-Head Comparison Panels -->
+        <div class="head-to-head-grid">
+          <!-- Monolith Approach -->
+          <div class="h2h-panel monolith-panel">
+            <div class="h2h-header">
+              <div class="h2h-title-wrap">
+                <span class="h2h-pill-danger">Traditional Pattern</span>
+                <h4>Monolith Context Dump (CLAUDE.md)</h4>
+              </div>
+              <span class="h2h-score" id="h2h-mono-tokens">3,034 Tokens</span>
+            </div>
+            <p class="h2h-desc">
+              Every turn dumps the entire 11.5 KB documentation corpus into the system prompt. Forces the model to parse megabytes of unrelated rules.
+            </p>
+            <ul class="h2h-list">
+              <li><span class="cross">✕</span> <strong>Severe Prefill Lag:</strong> <span id="h2h-mono-ttft">9,227 ms</span> time-to-first-token</li>
+              <li><span class="cross">✕</span> <strong>O(N) Token Bloat:</strong> Scales linearly with team documentation size</li>
+              <li><span class="cross">✕</span> <strong>Attention Dispersion:</strong> Critical ADR policies get lost in context walls</li>
+              <li><span class="cross">✕</span> <strong>Cloud Cost Escalation:</strong> Wastes 80% of budget on repeat prompt processing</li>
+            </ul>
+          </div>
+
+          <!-- OKF Progressive Disclosure -->
+          <div class="h2h-panel okf-panel">
+            <div class="h2h-header">
+              <div class="h2h-title-wrap">
+                <span class="h2h-pill-success">OKF Memory Pattern</span>
+                <h4>Progressive Disclosure (In-Memory BM25)</h4>
+              </div>
+              <span class="h2h-score score-glow" id="h2h-okf-tokens">603 Tokens</span>
+            </div>
+            <p class="h2h-desc">
+              In-memory BM25 index (&lt;300µs) extracts <em>only</em> the single verified ADR relevant to the user's specific coding task.
+            </p>
+            <ul class="h2h-list">
+              <li><span class="check">✓</span> <strong>Instant First Token:</strong> <span id="h2h-okf-ttft">8,682 ms</span> (<span id="h2h-okf-speedup">1.1x faster</span>)</li>
+              <li><span class="check">✓</span> <strong>O(1) Bounded Prompt:</strong> Consistently minimal context overhead</li>
+              <li><span class="check">✓</span> <strong>Zero Distraction:</strong> LLM focuses purely on the target policy decision</li>
+              <li><span class="check">✓</span> <strong>100% Policy Adherence:</strong> Flawless code generation with zero hallucinations</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Reproduce Banner -->
+        <div class="benchmark-repro-card">
+          <div class="repro-left">
+            <div class="repro-title">Reproduce These Benchmarks On Your Own Machine</div>
+            <p class="repro-desc">100% pure Go standard library suite. Zero external dependencies. Supports LM Studio, Ollama, OpenAI, Claude, and Gemini.</p>
+          </div>
+          <div class="repro-cmd-box" data-copy="make benchmark">
+            <code>$ make benchmark</code>
+            <span class="copy-icon">📋</span>
+          </div>
+        </div>
+
+        <!-- Architectural Feature Matrix -->
+        <div class="matrix-header-wrap">
+          <h3 class="matrix-sub-title">System Architecture Matrix: OKF vs. Alternatives</h3>
+          <p class="matrix-sub-desc">Comparison of runtime latency, storage transparency, and operational complexity.</p>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Feature / Metric</th>
+                <th class="col-highlight">OKF Agent Memory</th>
+                <th>Mem0 / Letta</th>
+                <th>Ad-hoc Markdown (CLAUDE.md)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Search Latency</strong></td>
+                <td class="col-highlight"><span class="badge-winner">&lt; 300 µs</span> (In-Memory BM25)</td>
+                <td>150 – 800 ms (Vector API)</td>
+                <td>N/A (Full context scan)</td>
+              </tr>
+              <tr>
+                <td><strong>Cold Start / Overhead</strong></td>
+                <td class="col-highlight"><span class="badge-winner">&lt; 4 ms</span> (Pure Go Binary)</td>
+                <td>1.5 – 3.0 s (Python / DB)</td>
+                <td>0 ms (Static File)</td>
+              </tr>
+              <tr>
+                <td><strong>Storage &amp; Format</strong></td>
+                <td class="col-highlight">Standard OKF v0.2 Markdown</td>
+                <td>Postgres / Pinecone (Black Box)</td>
+                <td>Unstructured text</td>
+              </tr>
+              <tr>
+                <td><strong>Runtime Cost</strong></td>
+                <td class="col-highlight"><span class="badge-winner">0.00 €</span> (Zero API fees)</td>
+                <td>$$$ per Embedding &amp; DB host</td>
+                <td>Context Bloat Costs</td>
+              </tr>
+              <tr>
+                <td><strong>Trust Signals</strong></td>
+                <td class="col-highlight"><code>verified:</code> vs <code>generated:</code></td>
+                <td>Opaque Vector Weights</td>
+                <td>None</td>
+              </tr>
+              <tr>
+                <td><strong>Git Native (Diff/Blame)</strong></td>
+                <td class="col-highlight">✅ 100% Native</td>
+                <td>❌ Proprietary DB</td>
+                <td>✅ Native</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture Visualizer -->
+    <section id="architecture" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Design System</span>
+          <h2 class="section-title">The 5-Layer Architectural Model</h2>
+          <p class="section-desc">A clean, decoupled hierarchy ensuring portability across any AI agent or IDE.</p>
+        </div>
+
+        <div class="arch-stack">
+          <div class="arch-layer">
+            <span class="layer-num">LAYER 5</span>
+            <div class="layer-info">
+              <h4>Knowledge Corpus Layer (knowledge/)</h4>
+              <p>Conformant OKF v0.2 bundle containing dated change logs, indexes, and frontmatter concepts.</p>
+            </div>
+          </div>
+
+          <div class="arch-layer">
+            <span class="layer-num">LAYER 4</span>
+            <div class="layer-info">
+              <h4>Deterministic Tooling Layer (Go CLI & MCP)</h4>
+              <p>Zero-dependency single executable providing sub-300µs BM25 search, mutations, and graph validation.</p>
+            </div>
+          </div>
+
+          <div class="arch-layer">
+            <span class="layer-num">LAYER 3</span>
+            <div class="layer-info">
+              <h4>Agent Skills Layer (.agents/skills/okf-memory/)</h4>
+              <p>Structured operational playbooks for Claude Code, Cursor, Windsurf, and custom subagents.</p>
+            </div>
+          </div>
+
+          <div class="arch-layer">
+            <span class="layer-num">LAYER 2</span>
+            <div class="layer-info">
+              <h4>Convention Layer (Convention v0.1)</h4>
+              <p>Normative behavioral rules: Search-Before-Write, Anti-Duplication, and Trust Tiers.</p>
+            </div>
+          </div>
+
+          <div class="arch-layer">
+            <span class="layer-num">LAYER 1</span>
+            <div class="layer-info">
+              <h4>Specification Layer (Open Knowledge Format v0.2)</h4>
+              <p>Standardized YAML frontmatter and Markdown syntax defined by Google Cloud.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quickstart Section -->
+    <section id="quickstart" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Zero to Productive</span>
+          <h2 class="section-title">Get Started in 60 Seconds</h2>
+          <p class="section-desc">Install via universal cURL 1-liner or Go and bootstrap any repository with a single command.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">1️⃣</div>
+            <h3 class="feature-title">Install OKF CLI</h3>
+            <p class="feature-text">Universal 1-liner for macOS (Apple Silicon / Intel) and Linux:</p>
+            <div class="install-pill" style="margin-top: 16px; width: 100%;"
+              data-copy="curl -fsSL https://okf-memory.dev/install.sh | sh">
+              <span>$ curl -fsSL https://okf-memory.dev/install.sh | sh</span>
+              <span class="copy-icon">📋</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">2️⃣</div>
+            <h3 class="feature-title">Bootstrap Any Project</h3>
+            <p class="feature-text">Switch into your project and initialize memory:</p>
+            <div class="install-pill" style="margin-top: 16px; width: 100%;" data-copy="okf bootstrap .">
+              <span>$ okf bootstrap .</span>
+              <span class="copy-icon">📋</span>
+            </div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">3️⃣</div>
+            <h3 class="feature-title">Connect Your Agent</h3>
+            <p class="feature-text">Connect Claude Code, Cursor, or Windsurf directly via the built-in stdio MCP server.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive MCP Config Viewer -->
+        <div class="mcp-config-box">
+          <div class="mcp-header">
+            <div class="mcp-tabs">
+              <button class="mcp-tab-btn active" data-mcp="claude">Claude Desktop / Code</button>
+              <button class="mcp-tab-btn" data-mcp="cursor">Cursor (.cursor/mcp.json)</button>
+              <button class="mcp-tab-btn" data-mcp="windsurf">Windsurf</button>
+              <button class="mcp-tab-btn" data-mcp="cli">Agent Direct (AGENTS.md)</button>
+            </div>
+            <button class="mcp-copy-btn" id="mcp-copy-trigger">📋 Copy Config</button>
+          </div>
+          <div class="mcp-body">
+            <pre class="mcp-code" id="mcp-code-display">{
+  "mcpServers": {
+    "okf-memory": {
+      "command": "okf",
+      "args": ["mcp", "knowledge"]
+    }
+  }
+}</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Common Questions</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-desc">Everything you need to know about OKF Agent Memory, architecture, and deployment.</p>
+        </div>
+
+        <div class="faq-accordion">
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Is OKF Agent Memory an official Google product?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>No. Google Cloud created and published the open <strong>Open Knowledge Format (OKF) v0.2</strong>
+                specification. <strong>OKF Agent Memory</strong> is an independent open-source Go implementation that
+                standardizes OKF as a persistent memory layer for AI agents with sub-300µs BM25 search, CLI tooling, and
+                an embedded Model Context Protocol (MCP) server.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Why in-memory BM25 search instead of a Vector Database (Mem0, Letta)?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>Vector databases require background containers, Python runtimes, and costly API embedding calls for
+                every write and query, adding 150ms–800ms of latency. OKF loads your repository's knowledge bundle
+                directly into memory in &lt;4ms and searches with BM25 in &lt;300µs — with 0.00 € API costs and 100%
+                offline predictability.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>How does OKF prevent "Memory Rot" compared to CLAUDE.md or .cursorrules?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>Flat markdown files inevitably grow into 20,000-token monoliths that blow your context window and
+                degrade agent intelligence. OKF employs <strong>Progressive Disclosure</strong>: a structured graph of
+                atomic, interlinked concept files (<code>knowledge/</code>). The agent queries the index and loads only
+                the exact 300-token concept it needs. Plus, <code>okf validate --drift</code> continuously ensures links
+                and summaries stay synchronized.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>How is this different from session loggers like agentmemory (agent-memory.dev)?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>Tools like <code>agentmemory</code> run a local Node.js daemon that intercepts chat transcripts and
+                attempts to summarize session logs with background LLM API calls. In contrast, <strong>OKF Agent
+                  Memory</strong> follows the Karpathy "LLM Wiki" principle: curated, high-signal architecture decisions
+                authored directly into Git Markdown, version-controlled via Pull Requests, with strict Trust Tiers
+                (<code>verified: human</code> vs. <code>generated: agent</code>) and zero running daemon overhead.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>Can I use OKF completely offline with local models (Ollama, LM Studio)?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>Yes, 100%. The Go single binary runs entirely on your local machine with zero external network calls
+                and zero telemetry. It is especially effective for local 8B–14B models (e.g. Qwen 2.5 Coder, Llama 3)
+                because it drastically reduces context prefill latency from 6+ seconds down to under 50ms.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-trigger">
+              <span>How does it handle multi-repository enterprise setups?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-content">
+              <p>In open-source, each repository manages its own self-contained memory bundle in
+                <code>knowledge/</code>. For engineering teams with 50+ microservices, our upcoming <strong>OKF
+                  Cloud</strong> enables federated cross-repo search, visual graph exploration, and automated PR
+                governance bots.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Waitlist / Dual Launch Call to Action -->
+    <section id="waitlist" class="section">
+      <div class="container">
+        <div class="waitlist-card">
+          <span class="section-tag" style="color: #c4b5fd;">Enterprise & Teams</span>
+          <h2 class="section-title">Need Cross-Repo Memory & Visual Graphs?</h2>
+          <p class="section-desc" style="max-width: 600px; margin: 0 auto;">
+            Join the <strong>OKF Cloud Private Beta</strong>. Connect 50+ microservices into a unified federated memory
+            graph, with human-in-the-loop verification portals and automated PR compliance bots.
+          </p>
+
+          <form id="waitlist-form" class="waitlist-form" data-provider="brevo"
+            data-brevo-action="https://861acd5a.sibforms.com/serve/MUIFAKnhOMBlsXCV2K6cq0zhN39PEsWAj0gQrEjvnyOJuGDWus7p2t45V7hFEYEaaRXP-xPCU3lodz3ACE3OrUhW6ZpG-icA5MS-xZuSNFUgOk7GBjykxVnzgwDx9tKCHw22OYJxSbApIRp-NoqGKjoR97LnCFjHW_QgZalZrgjGXsnPppbeeT4gSblO14Xkoc7-lWKrt_WnFnCMPQ==">
+            <input type="email" id="waitlist-email" class="waitlist-input"
+              placeholder="Enter your work email (e.g. alex@company.com)" required>
+            <button type="submit" class="btn btn-primary" style="padding: 14px 28px;">Request VIP Access</button>
+
+            <div class="form-consent">
+              <input type="checkbox" id="waitlist-consent" required checked>
+              <label for="waitlist-consent">I agree to receive the OKF Cloud Beta invitation and early developer
+                updates. (Unsubscribe anytime. Powered by Brevo / EU data-protection compliant).</label>
+            </div>
+          </form>
+          <div id="waitlist-feedback" style="display: none;"></div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">No spam. Early beta invitations &
+            developer preview updates only.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <div>
+        <p><strong>OKF Agent Memory</strong> — Open Knowledge Format (OKF) v0.2 Persistent Project Memory.</p>
+        <p style="margin-top: 4px;">Software Release <a
+            href="https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.1.0" target="_blank" rel="noopener"
+            style="color: #38bdf8; text-decoration: underline;">v0.1.0</a> under the permissive MIT License.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="https://github.com/okf-memory/okf-agent-memory" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.1.0" target="_blank"
+            rel="noopener">Release v0.1.0</a></li>
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CONVENTION.md" target="_blank"
+            rel="noopener">Convention v0.1</a></li>
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CLI.md" target="_blank"
+            rel="noopener">CLI Docs</a></li>
+        <li><a href="https://github.com/okf-memory/homebrew-tap" target="_blank" rel="noopener">Homebrew Tap</a></li>
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/GETTING_STARTED.md" target="_blank"
+            rel="noopener">Install Guide</a></li>
+        <li><button id="cookie-settings-btn" class="footer-link-btn" type="button">Cookie Settings</button></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Cookie Consent Banner (DSGVO / GDPR Compliant) -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-label="Privacy & Cookie Preferences" style="display: none;">
+    <div class="cookie-banner-inner">
+      <div class="cookie-banner-text">
+        <div class="cookie-banner-header">
+          <span class="cookie-icon">🍪</span>
+          <strong>Privacy & Cookie Preferences</strong>
+        </div>
+        <p>
+          We use privacy-friendly Google Analytics 4 (anonymized IP) to understand how developers discover OKF Agent Memory. No advertising cookies are used. You can adjust or revoke your choice anytime.
+        </p>
+      </div>
+      <div class="cookie-banner-actions">
+        <button id="cookie-btn-reject" class="btn btn-cookie-secondary" type="button">Essential Only</button>
+        <button id="cookie-btn-accept" class="btn btn-cookie-primary" type="button">Accept Analytics</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
