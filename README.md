@@ -39,7 +39,7 @@ Conversations with AI coding agents reset whenever context windows close. Archit
 | **Official Website** | Interactive landing page, benchmarks, and interactive terminal | [okf-memory.dev](https://okf-memory.dev) |
 | **Core Engine** | Go implementation, CLI, and embedded MCP server | [okf-memory/okf-agent-memory](https://github.com/okf-memory/okf-agent-memory) |
 | **Homebrew Tap** | Official macOS & Linux Homebrew Formula | [okf-memory/homebrew-tap](https://github.com/okf-memory/homebrew-tap) |
-| **Latest Release** | Standalone releases, changelog, and tags | [v0.1.0 Release](https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.1.0) |
+| **Latest Release** | Standalone releases, changelog, and tags | [v0.1.2 Release](https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.1.2) |
 | **OKF Specification** | Google Cloud Open Knowledge Format v0.2 standard | [Google OKF v0.2 Spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) |
 | **Agent Convention** | Behavioral rules, Search-Before-Write, and lifecycle tiers | [Convention v0.1](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CONVENTION.md) |
 | **CLI & MCP Reference** | Command-line interface and tool calling reference | [CLI Documentation](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CLI.md) |

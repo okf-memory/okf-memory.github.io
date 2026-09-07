@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------------------------------------
   const installCommands = {
     curl: 'curl -fsSL https://okf-memory.dev/install.sh | sh',
-    go: 'go install github.com/okf-memory/okf-agent-memory/cmd/okf@v0.1.0',
+    go: 'go install github.com/okf-memory/okf-agent-memory/cmd/okf@v0.1.2',
     source: 'git clone https://github.com/okf-memory/okf-agent-memory.git && cd okf-agent-memory && make build',
     brew: 'brew install okf-memory/tap/okf'
   };
@@ -130,20 +130,42 @@ document.addEventListener('DOMContentLoaded', () => {
   faqTriggers.forEach(trigger => {
     trigger.addEventListener('click', () => {
       const item = trigger.closest('.faq-item');
+      const content = item ? item.querySelector('.faq-content') : null;
       const wasActive = item.classList.contains('active');
 
-      // Close any other open items
+      // Close any other open items and reset their max-height
       document.querySelectorAll('.faq-item').forEach(other => {
-        if (other !== item) other.classList.remove('active');
+        if (other !== item) {
+          other.classList.remove('active');
+          const otherContent = other.querySelector('.faq-content');
+          if (otherContent) otherContent.style.maxHeight = null;
+        }
       });
 
       // Toggle current item
       if (!wasActive) {
         item.classList.add('active');
+        if (content) {
+          content.style.maxHeight = (content.scrollHeight + 40) + 'px';
+        }
       } else {
         item.classList.remove('active');
+        if (content) {
+          content.style.maxHeight = null;
+        }
       }
     });
+  });
+
+  // Recompute active FAQ height on window resize (e.g. mobile orientation change)
+  window.addEventListener('resize', () => {
+    const activeItem = document.querySelector('.faq-item.active');
+    if (activeItem) {
+      const activeContent = activeItem.querySelector('.faq-content');
+      if (activeContent) {
+        activeContent.style.maxHeight = (activeContent.scrollHeight + 40) + 'px';
+      }
+    }
   });
 
   // ------------------------------------------------------------------------
