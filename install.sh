@@ -14,7 +14,7 @@ YELLOW='\033[33m'
 RED='\033[31m'
 
 REPO="okf-memory/okf-agent-memory"
-VERSION="v0.2.0"
+VERSION="v0.3.0"
 BINARY="okf"
 
 printf "\n${BOLD}${CYAN}🧠 Installing OKF Agent Memory (${VERSION})${RESET}\n"
