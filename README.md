@@ -41,9 +41,9 @@ Conversations with AI coding agents reset whenever context windows close. Archit
 | **Homebrew Tap** | Official macOS & Linux Homebrew Formula | [okf-memory/homebrew-tap](https://github.com/okf-memory/homebrew-tap) |
 | **Latest Release** | Standalone releases, changelog, and tags | [v0.4.1 Release](https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.4.1) |
 | **OKF Specification** | Google Cloud Open Knowledge Format v0.2 standard | [Google OKF v0.2 Spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) |
-| **Agent Convention** | Behavioral rules, Search-Before-Write, and lifecycle tiers | [Convention v0.1](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CONVENTION.md) |
-| **CLI & MCP Reference** | Command-line interface and tool calling reference | [CLI Documentation](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CLI.md) |
-| **Installation Guide** | Universal setup instructions for macOS and Linux | [Getting Started](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/GETTING_STARTED.md) |
+| **Agent Convention** | Behavioral rules, Search-Before-Write, and lifecycle tiers | [Convention v0.1](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/spec/CONVENTION.md) |
+| **CLI & MCP Reference** | Command-line interface and tool calling reference | [CLI Documentation](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/CLI.md) |
+| **Installation Guide** | Universal setup instructions for macOS and Linux | [Getting Started](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/GETTING_STARTED.md) |
 
 ---
 

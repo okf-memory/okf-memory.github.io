@@ -248,11 +248,11 @@ Found 1 matching concept(s) in 'knowledge':
             <h3 class="hw-machine-title" id="hw-machine-title">OpenAI Production Cloud • api.openai.com</h3>
             <p class="hw-machine-details" id="hw-machine-details">
               <strong>Deployment:</strong> Remote Cloud SaaS • <strong>Model:</strong> <code>gpt-5.6-sol</code> • 
-              <strong>Primary Benefit:</strong> -80.1% Token Billing &amp; Context Savings (3,034 → 603 tokens)
+              <strong>Primary Benefit:</strong> 2.4x Faster TTFT &amp; -75.7% Prompt Context Overhead (3,771 → 917 tokens)
             </p>
           </div>
           <div class="hw-actions">
-            <a id="hw-report-link" href="https://github.com/okf-memory/okf-agent-memory/blob/main/benchmarks/results/BENCHMARK_RESULTS_openai_gpt-5.6-sol.md" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
+            <a id="hw-report-link" href="https://github.com/okf-memory/okf-agent-memory/blob/main/benchmarks/results/BENCHMARK_RESULTS_DMAA_openai_gpt-5.6-sol.md" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">
               View Raw Report ↗
             </a>
           </div>
@@ -265,12 +265,16 @@ Found 1 matching concept(s) in 'knowledge':
             <div class="model-category-block block-cloud">
               <div class="model-category-header">
                 <span class="cat-pill cat-pill-cloud">☁️ Remote / Cloud API</span>
-                <span class="cat-sub">Pay-per-Token SaaS • Billing Focus</span>
+                <span class="cat-sub">Pay-per-Token SaaS • Billing &amp; Attention Focus</span>
               </div>
               <div class="model-category-tabs">
                 <button class="model-tab-btn model-tab-remote active" data-model="openai">
-                  <span class="tab-chip">Cloud Flagship</span>
-                  <span class="tab-name">OpenAI GPT-5.6 Sol</span>
+                  <span class="tab-chip">OpenAI Flagship</span>
+                  <span class="tab-name">GPT-5.6 Sol</span>
+                </button>
+                <button class="model-tab-btn model-tab-remote" data-model="claude">
+                  <span class="tab-chip">Anthropic Frontier</span>
+                  <span class="tab-name">Claude Opus 5</span>
                 </button>
               </div>
             </div>
@@ -282,17 +286,17 @@ Found 1 matching concept(s) in 'knowledge':
                 <span class="cat-sub">Metal GPU • TTFT Acceleration Focus</span>
               </div>
               <div class="model-category-tabs">
-                <button class="model-tab-btn model-tab-local" data-model="ministral">
-                  <span class="tab-chip">14B Reasoning</span>
-                  <span class="tab-name">Mistral Ministral 14B</span>
+                <button class="model-tab-btn model-tab-local" data-model="qwen14b">
+                  <span class="tab-chip">14B Code Flagship</span>
+                  <span class="tab-name">Qwen 2.5 Coder 14B</span>
                 </button>
                 <button class="model-tab-btn model-tab-local" data-model="gemma26b">
                   <span class="tab-chip">26B MoE</span>
                   <span class="tab-name">Google Gemma 4 26B</span>
                 </button>
-                <button class="model-tab-btn model-tab-local" data-model="gemma12b">
-                  <span class="tab-chip">12B Dense</span>
-                  <span class="tab-name">Google Gemma 4 12B</span>
+                <button class="model-tab-btn model-tab-local" data-model="qwen30b">
+                  <span class="tab-chip">30B Heavyweight</span>
+                  <span class="tab-name">Qwen 3 Coder 30B</span>
                 </button>
               </div>
             </div>
@@ -304,36 +308,36 @@ Found 1 matching concept(s) in 'knowledge':
           <div class="b-card b-card-glow">
             <div class="b-card-header">
               <span class="b-card-label">Context Overhead Reduction</span>
-              <span class="b-delta-badge" id="metric-delta-tokens">-80.1%</span>
+              <span class="b-delta-badge" id="metric-delta-tokens">-75.7%</span>
             </div>
-            <div class="b-card-value" id="metric-tokens-val">603 <span class="unit">tokens</span></div>
-            <div class="b-card-sub" id="metric-tokens-sub">vs. 3,034 tokens in Monolith Dump</div>
+            <div class="b-card-value" id="metric-tokens-val">917 <span class="unit">tokens</span></div>
+            <div class="b-card-sub" id="metric-tokens-sub">vs. 3,771 tokens in Monolith Dump</div>
             <div class="b-progress-bar">
-              <div class="b-progress-fill tokens-fill" style="width: 19.9%;"></div>
+              <div class="b-progress-fill tokens-fill" style="width: 24.3%;"></div>
             </div>
           </div>
 
           <div class="b-card b-card-glow">
             <div class="b-card-header">
               <span class="b-card-label">Prefill Latency (TTFT)</span>
-              <span class="b-delta-badge badge-green" id="metric-delta-ttft">1.1x Faster</span>
+              <span class="b-delta-badge badge-green" id="metric-delta-ttft">2.4x Faster</span>
             </div>
-            <div class="b-card-value" id="metric-ttft-val">8,682 <span class="unit">ms</span></div>
-            <div class="b-card-sub" id="metric-ttft-sub">vs. 9,227 ms cloud TTFT latency</div>
+            <div class="b-card-value" id="metric-ttft-val">11,565 <span class="unit">ms</span></div>
+            <div class="b-card-sub" id="metric-ttft-sub">vs. 27,213 ms cloud TTFT latency</div>
             <div class="b-progress-bar">
-              <div class="b-progress-fill ttft-fill" style="width: 94.1%;"></div>
+              <div class="b-progress-fill ttft-fill" style="width: 42.5%;"></div>
             </div>
           </div>
 
           <div class="b-card">
             <div class="b-card-header">
               <span class="b-card-label">Total Turn Duration</span>
-              <span class="b-delta-badge badge-cyan" id="metric-delta-time">-1.0s</span>
+              <span class="b-delta-badge badge-cyan" id="metric-delta-time">-41.9s</span>
             </div>
-            <div class="b-card-value" id="metric-time-val">14.9 <span class="unit">sec</span></div>
-            <div class="b-card-sub" id="metric-time-sub">vs. 15.9 sec full monolith turn</div>
+            <div class="b-card-value" id="metric-time-val">43.0 <span class="unit">sec</span></div>
+            <div class="b-card-sub" id="metric-time-sub">vs. 84.9 sec full monolith turn (2.0x faster)</div>
             <div class="b-progress-bar">
-              <div class="b-progress-fill time-fill" style="width: 93.7%;"></div>
+              <div class="b-progress-fill time-fill" style="width: 50.7%;"></div>
             </div>
           </div>
 
@@ -342,13 +346,13 @@ Found 1 matching concept(s) in 'knowledge':
               <span class="b-card-label">Policy Adherence Accuracy</span>
               <span class="b-delta-badge badge-green" id="metric-delta-compliance">100% PASS</span>
             </div>
-            <div class="b-card-value" id="metric-compliance-val">4/4 <span class="unit">checks</span></div>
-            <div class="b-card-sub" id="metric-compliance-sub">AES-256-GCM • 96-bit Nonce • Headers</div>
+            <div class="b-card-value" id="metric-compliance-val">9/9 <span class="unit">checks</span></div>
+            <div class="b-card-sub" id="metric-compliance-sub">AES-256-GCM • 96-bit Nonce • AAG Directives • Provenance</div>
             <div class="b-compliance-pills">
               <span class="c-pill">✓ GCM</span>
               <span class="c-pill">✓ 12B Nonce</span>
               <span class="c-pill">✓ Version Header</span>
-              <span class="c-pill">✓ No ECB/CBC</span>
+              <span class="c-pill">✓ AAG Directives</span>
             </div>
           </div>
         </div>
@@ -362,16 +366,16 @@ Found 1 matching concept(s) in 'knowledge':
                 <span class="h2h-pill-danger">Traditional Pattern</span>
                 <h4>Monolith Context Dump (CLAUDE.md)</h4>
               </div>
-              <span class="h2h-score" id="h2h-mono-tokens">3,034 Tokens</span>
+              <span class="h2h-score" id="h2h-mono-tokens">3,771 Tokens</span>
             </div>
             <p class="h2h-desc">
               Every turn dumps the entire 11.5 KB documentation corpus into the system prompt. Forces the model to parse megabytes of unrelated rules.
             </p>
             <ul class="h2h-list">
-              <li><span class="cross">✕</span> <strong>Severe Prefill Lag:</strong> <span id="h2h-mono-ttft">9,227 ms</span> time-to-first-token</li>
+              <li><span class="cross">✕</span> <strong>Severe Prefill Lag:</strong> <span id="h2h-mono-ttft">27,213 ms</span> time-to-first-token</li>
               <li><span class="cross">✕</span> <strong>O(N) Token Bloat:</strong> Scales linearly with team documentation size</li>
               <li><span class="cross">✕</span> <strong>Attention Dispersion:</strong> Critical ADR policies get lost in context walls</li>
-              <li><span class="cross">✕</span> <strong>Cloud Cost Escalation:</strong> Wastes 80% of budget on repeat prompt processing</li>
+              <li><span class="cross">✕</span> <strong>Cloud Cost Escalation:</strong> Wastes 75%+ of budget on repeat prompt processing</li>
             </ul>
           </div>
 
@@ -382,13 +386,13 @@ Found 1 matching concept(s) in 'knowledge':
                 <span class="h2h-pill-success">OKF Memory Pattern</span>
                 <h4>Progressive Disclosure (In-Memory BM25)</h4>
               </div>
-              <span class="h2h-score score-glow" id="h2h-okf-tokens">603 Tokens</span>
+              <span class="h2h-score score-glow" id="h2h-okf-tokens">917 Tokens</span>
             </div>
             <p class="h2h-desc">
               In-memory BM25 index (&lt;300µs) extracts <em>only</em> the single verified ADR relevant to the user's specific coding task.
             </p>
             <ul class="h2h-list">
-              <li><span class="check">✓</span> <strong>Instant First Token:</strong> <span id="h2h-okf-ttft">8,682 ms</span> (<span id="h2h-okf-speedup">1.1x faster</span>)</li>
+              <li><span class="check">✓</span> <strong>Instant First Token:</strong> <span id="h2h-okf-ttft">11,565 ms</span> (<span id="h2h-okf-speedup">2.4x faster</span>)</li>
               <li><span class="check">✓</span> <strong>O(1) Bounded Prompt:</strong> Consistently minimal context overhead</li>
               <li><span class="check">✓</span> <strong>Zero Distraction:</strong> LLM focuses purely on the target policy decision</li>
               <li><span class="check">✓</span> <strong>100% Policy Adherence:</strong> Flawless code generation with zero hallucinations</li>
@@ -721,12 +725,12 @@ Found 1 matching concept(s) in 'knowledge':
         <li><a href="https://github.com/okf-memory/okf-agent-memory" target="_blank" rel="noopener">GitHub</a></li>
         <li><a href="https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.4.1" target="_blank"
             rel="noopener">Release v0.4.1</a></li>
-        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CONVENTION.md" target="_blank"
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/spec/CONVENTION.md" target="_blank"
             rel="noopener">Convention v0.1</a></li>
-        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/CLI.md" target="_blank"
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/CLI.md" target="_blank"
             rel="noopener">CLI Docs</a></li>
         <li><a href="https://github.com/okf-memory/homebrew-tap" target="_blank" rel="noopener">Homebrew Tap</a></li>
-        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/GETTING_STARTED.md" target="_blank"
+        <li><a href="https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/GETTING_STARTED.md" target="_blank"
             rel="noopener">Install Guide</a></li>
         <li><button id="cookie-settings-btn" class="footer-link-btn" type="button">Cookie Settings</button></li>
       </ul>
