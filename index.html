@@ -7,9 +7,16 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
 
-    // Initialize default consent from storage or default to denied
+    // Initialize default consent from domain cookie or storage fallback
     var storedConsent = null;
-    try { storedConsent = localStorage.getItem('okf_cookie_consent'); } catch (e) {}
+    try {
+      var match = document.cookie.match(/(^|;)\s*okf_cookie_consent\s*=\s*([^;]+)/);
+      if (match) {
+        storedConsent = decodeURIComponent(match[2]);
+      } else {
+        storedConsent = localStorage.getItem('okf_cookie_consent');
+      }
+    } catch (e) {}
 
     gtag('consent', 'default', {
       'analytics_storage': storedConsent === 'granted' ? 'granted' : 'denied',

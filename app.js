@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------------------------------------
   // 1. Quick Copy Helpers
   // ------------------------------------------------------------------------
+  let activeInstallKey = 'curl';
+
   function attachCopyHandlers() {
     const copyButtons = document.querySelectorAll('[data-copy]');
     copyButtons.forEach(btn => {
@@ -19,6 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             btn.innerHTML = originalHtml;
           }, 2000);
+
+          // GA4 Tracking
+          if (typeof gtag === 'function') {
+            let method = 'other';
+            let placement = 'body';
+
+            if (btn.id === 'hero-install-pill' || btn.closest('.hero')) {
+              method = activeInstallKey;
+              placement = 'hero';
+            } else if (btn.closest('#quickstart')) {
+              placement = 'quickstart';
+              if (textToCopy.includes('install.sh')) method = 'curl';
+              else if (textToCopy.includes('bootstrap')) method = 'bootstrap';
+            } else if (btn.closest('.benchmark-box') || btn.closest('#benchmarks')) {
+              placement = 'benchmarks';
+              method = 'make_benchmark';
+            }
+
+            gtag('event', 'cli_quickstart_copy', {
+              'install_method': method,
+              'placement': placement
+            });
+          }
         } catch (err) {
           console.error('Failed to copy text: ', err);
         }
@@ -47,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btn.classList.add('active');
 
       const installKey = btn.getAttribute('data-install');
+      activeInstallKey = installKey;
       const cmd = installCommands[installKey] || installCommands.curl;
 
       if (heroInstallCmd && heroInstallPill) {
@@ -253,6 +279,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const cookieBtnReject = document.getElementById('cookie-btn-reject');
   const cookieSettingsBtn = document.getElementById('cookie-settings-btn');
 
+  function getConsentCookie() {
+    const match = document.cookie.match(/(^|;)\s*okf_cookie_consent\s*=\s*([^;]+)/);
+    if (match) return decodeURIComponent(match[2]);
+    try { return localStorage.getItem('okf_cookie_consent'); } catch (e) {}
+    return null;
+  }
+
+  function setConsentCookie(value) {
+    const maxAge = 365 * 24 * 60 * 60; // 1 year
+    let cookieStr = `okf_cookie_consent=${encodeURIComponent(value)}; path=/; max-age=${maxAge}; SameSite=Lax`;
+    const hostname = window.location.hostname;
+    if (hostname === 'okf-memory.dev' || hostname.endsWith('.okf-memory.dev')) {
+      cookieStr += '; domain=.okf-memory.dev';
+    }
+    document.cookie = cookieStr;
+    try { localStorage.setItem('okf_cookie_consent', value); } catch (e) {}
+  }
+
   function openCookieBanner() {
     if (!cookieBanner) return;
     cookieBanner.style.display = 'block';
@@ -273,14 +317,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Show banner if no consent preference is stored
-  const existingConsent = localStorage.getItem('okf_cookie_consent');
+  const existingConsent = getConsentCookie();
   if (!existingConsent) {
     setTimeout(openCookieBanner, 600);
   }
 
   if (cookieBtnAccept) {
     cookieBtnAccept.addEventListener('click', () => {
-      localStorage.setItem('okf_cookie_consent', 'granted');
+      setConsentCookie('granted');
       if (typeof gtag === 'function') {
         gtag('consent', 'update', {
           'analytics_storage': 'granted'
@@ -296,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (cookieBtnReject) {
     cookieBtnReject.addEventListener('click', () => {
-      localStorage.setItem('okf_cookie_consent', 'denied');
+      setConsentCookie('denied');
       if (typeof gtag === 'function') {
         gtag('consent', 'update', {
           'analytics_storage': 'denied'
@@ -502,6 +546,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = benchmarkRuns[modelKey];
       if (!data) return;
 
+      if (typeof gtag === 'function') {
+        gtag('event', 'benchmark_tab_switch', {
+          'model_selected': modelKey
+        });
+      }
+
       if (hwIcon && data.hwIcon) hwIcon.textContent = data.hwIcon;
       if (hwPillText && data.hwPillText) hwPillText.textContent = data.hwPillText;
       if (hwMachineTitle && data.hwTitle) hwMachineTitle.textContent = data.hwTitle;
@@ -551,6 +601,32 @@ document.addEventListener('DOMContentLoaded', () => {
       if (h2hOkfTokens) h2hOkfTokens.textContent = data.okfTokens;
       if (h2hOkfTtft) h2hOkfTtft.textContent = data.okfTtft;
       if (h2hOkfSpeedup) h2hOkfSpeedup.textContent = data.okfSpeedup;
+    });
+  });
+
+  // ------------------------------------------------------------------------
+  // 9. GitHub Outbound Tracking
+  // ------------------------------------------------------------------------
+  document.querySelectorAll('a[href*="github.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      let repo = 'okf-agent-memory';
+      const href = link.href || '';
+      if (href.includes('homebrew-tap')) repo = 'homebrew-tap';
+      else if (href.includes('registry')) repo = 'registry';
+      else if (href.includes('okf-memory-hub')) repo = 'okf-memory-hub';
+
+      let placement = 'body';
+      if (link.closest('header') || link.closest('.nav-wrap')) placement = 'nav';
+      else if (link.closest('footer')) placement = 'footer';
+      else if (link.closest('.hero')) placement = 'hero';
+      else if (link.closest('#benchmarks') || link.id === 'hw-report-link') placement = 'benchmark';
+
+      if (typeof gtag === 'function') {
+        gtag('event', 'github_outbound_click', {
+          'target_repo': repo,
+          'placement': placement
+        });
+      }
     });
   });
 });
