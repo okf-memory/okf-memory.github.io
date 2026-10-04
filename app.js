@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------------------------------------
   const installCommands = {
     curl: 'curl -fsSL https://okf-memory.dev/install.sh | sh',
-    go: 'go install github.com/okf-memory/okf-agent-memory/cmd/okf@v0.5.0',
+    go: 'go install github.com/okf-memory/okf-agent-memory/cmd/okf@v0.6.0',
     source: 'git clone https://github.com/okf-memory/okf-agent-memory.git && cd okf-agent-memory && make build',
     brew: 'brew install okf-memory/tap/okf'
   };
