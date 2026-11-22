@@ -6,7 +6,7 @@
 
 [![Live Website](https://img.shields.io/badge/Website-okf--memory.dev-8b5cf6?style=flat-square)](https://okf-memory.dev)
 [![Main Engine](https://img.shields.io/badge/GitHub-okf--agent--memory-00ADD8?style=flat-square&logo=github)](https://github.com/okf-memory/okf-agent-memory)
-[![Specification](https://img.shields.io/badge/Specification-Google_OKF_v0.2-blue?style=flat-square)](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+[![Specification](https://img.shields.io/badge/Specification-OKF_v0.3-blue?style=flat-square)](https://github.com/open-knowledge-format/open-knowledge-format/blob/main/SPEC.md)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
 <p align="center">
@@ -40,7 +40,7 @@ Conversations with AI coding agents reset whenever context windows close. Archit
 | **Core Engine** | Go implementation, CLI, and embedded MCP server | [okf-memory/okf-agent-memory](https://github.com/okf-memory/okf-agent-memory) |
 | **Homebrew Tap** | Official macOS & Linux Homebrew Formula | [okf-memory/homebrew-tap](https://github.com/okf-memory/homebrew-tap) |
 | **Latest Release** | Standalone releases, changelog, and tags | [v0.9.0 Release](https://github.com/okf-memory/okf-agent-memory/releases/tag/v0.9.0) |
-| **OKF Specification** | Google Cloud Open Knowledge Format v0.2 standard | [Google OKF v0.2 Spec](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) |
+| **OKF Specification** | Open Knowledge Format v0.3 standard | [OKF v0.3 Spec](https://github.com/open-knowledge-format/open-knowledge-format/blob/main/SPEC.md) |
 | **Agent Convention** | Behavioral rules, Search-Before-Write, and lifecycle tiers | [Convention v0.1](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/spec/CONVENTION.md) |
 | **CLI & MCP Reference** | Command-line interface and tool calling reference | [CLI Documentation](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/CLI.md) |
 | **Installation Guide** | Universal setup instructions for macOS and Linux | [Getting Started](https://github.com/okf-memory/okf-agent-memory/blob/main/docs/guides/GETTING_STARTED.md) |
